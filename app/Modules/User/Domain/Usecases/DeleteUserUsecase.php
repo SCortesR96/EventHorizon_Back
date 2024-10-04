@@ -3,10 +3,10 @@
 namespace App\Modules\User\Domain\Usecases;
 
 use App\Config\Usecase;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Utils\Entities\Responses\ResponseEntity;
 use App\Modules\User\Domain\Repository\IUserRepository;
 
-class IndexUsersUsecase extends Usecase
+class DeleteUserUsecase extends Usecase
 {
     private IUserRepository $repository;
 
@@ -15,8 +15,8 @@ class IndexUsersUsecase extends Usecase
         $this->repository = $repository;
     }
 
-    public function execute($params = null): ResourceCollection
+    public function execute($id): ResponseEntity
     {
-        return $this->repository->index();
+        return $this->repository->delete($id);
     }
 }

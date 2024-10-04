@@ -15,5 +15,5 @@ abstract class IUserRepository
     public abstract function show(int $id): ResponseEntity;
     public abstract function store(UserStoreEntity $user);
     public abstract function update(UserUpdateEntity $user, int $id);
-    public abstract function delete(int $id): ResponseEntity;
+    public abstract function delete(int $id);
 }

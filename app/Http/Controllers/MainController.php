@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Enums\ApiStatusEnum;
+use App\Models\ResponseModel;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\{JsonResponse, Response};
 
@@ -11,12 +12,9 @@ class MainController extends Controller
 {
     public function response(ApiStatusEnum $status, string $message, $data = [], int $code = Response::HTTP_OK): JsonResponse
     {
+        $response = new ResponseModel($status, $message, $data);
         return response()->json(
-            [
-                'status'    => $status,
-                'message'   => $message,
-                'data'      => $data
-            ],
+            $response->toArray(),
             $code,
             ['Content-Type' => 'application/json']
         );
@@ -34,12 +32,13 @@ class MainController extends Controller
 
     public function error($message): JsonResponse
     {
-        return $this->response(
+        $result = $this->response(
             ApiStatusEnum::ERROR,
             $message,
             [],
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
+        return $result;
     }
 
     // ERROR SECTION

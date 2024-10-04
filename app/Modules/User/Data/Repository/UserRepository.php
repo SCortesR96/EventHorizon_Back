@@ -28,21 +28,21 @@ class UserRepository extends IUserRepository
 
     public function show(int $id): ResponseEntity
     {
-        throw new Exception('');
+        return $this->service->show($id);
     }
 
     public function store(UserStoreEntity $user)
     {
-        throw new Exception('');
+        return $this->service->store($user);
     }
 
     public function update(UserUpdateEntity $user, int $id)
     {
-        throw new Exception('');
+        return $this->service->update($user, $id);
     }
 
-    public function delete(int $id): ResponseEntity
+    public function delete(int $id)
     {
-        throw new Exception('');
+        return $this->service->delete($id);
     }
 }

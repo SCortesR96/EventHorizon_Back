@@ -126,6 +126,18 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        // CUSTOM LOGS
+        'User' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/user/User.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'Admin' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/admin/Admin.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 
 ];

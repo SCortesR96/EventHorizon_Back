@@ -31,14 +31,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('enabled')->default(true);
-            $table->boolean('deleted')->default(false);
-
-            $table->foreignId('deleted_by')->nullable();
-            $table->foreign('deleted_by')->references('id')->on('users');
-            $table->timestamp('deleted_at')->nullable();
-
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
