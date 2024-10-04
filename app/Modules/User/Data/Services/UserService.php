@@ -62,13 +62,12 @@ class UserService
 
         if (!$userData->isSuccess) return $userData;
 
-        $user                   = $userData->data;
+        $user                   = User::find($id);;
         $user->avatar           = $entity->avatar;
         $user->first_name       = $entity->first_name;
         $user->second_name      = $entity->second_name;
         $user->first_lastname   = $entity->first_lastname;
         $user->second_lastname  = $entity->second_lastname;
-        $user->document_type_id = $entity->document_type_id;
         $user->gender_id        = $entity->gender_id;
         $user->phone_country    = $entity->phone_country;
         $user->phone            = $entity->phone;

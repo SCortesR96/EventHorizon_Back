@@ -57,8 +57,7 @@ class UserController extends MainController
                 JsonResponse::HTTP_OK
             );
         } catch (Exception $e) {
-            $message = $this->getErrorMessage($e, 'UserController@index', 'User');
-            return $this->error($message);
+            return $this->error($e, 'UserController@index', 'User');
         }
     }
 
@@ -79,8 +78,7 @@ class UserController extends MainController
                 JsonResponse::HTTP_CREATED
             );
         } catch (Exception $e) {
-            $message = $this->getErrorMessage($e, 'UserController@store', 'User');
-            return $this->error($message);
+            return $this->error($e, 'UserController@store', 'User');
         }
     }
 
@@ -107,8 +105,7 @@ class UserController extends MainController
                 $data->code
             );
         } catch (Exception $e) {
-            $message = $this->getErrorMessage($e, 'UserController@show', 'Admin');
-            return $this->error($message);
+            return $this->error($e, 'UserController@show', 'User');
         }
     }
 
@@ -137,8 +134,7 @@ class UserController extends MainController
                 $data->code
             );
         } catch (Exception $e) {
-            $message = $this->getErrorMessage($e, 'UserController@update', 'Admin');
-            return $this->error($message);
+            return $this->error($e, 'UserController@update', 'User');
         }
     }
 
@@ -165,8 +161,7 @@ class UserController extends MainController
                 $data->code
             );
         } catch (Exception $e) {
-            $message = $this->getErrorMessage($e, 'UserController@delete', 'Admin');
-            return $this->error($message);
+            return $this->error($e, 'UserController@destroy', 'User');
         }
     }
 }

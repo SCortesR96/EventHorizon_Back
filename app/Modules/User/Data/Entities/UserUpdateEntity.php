@@ -11,7 +11,6 @@ class UserUpdateEntity
     public string   $second_name;
     public string   $first_lastname;
     public string   $second_lastname;
-    public string   $document_type_id;
     public string   $gender_id;
     public string   $phone_country;
     public string   $phone;
@@ -24,7 +23,6 @@ class UserUpdateEntity
         $this->second_name      = $request->second_name             ?? '';;
         $this->first_lastname   = $request->first_lastname;
         $this->second_lastname  = $request->second_lastname;
-        $this->document_type_id = $request->document_type_id;
         $this->gender_id        = $request->gender_id;
         $this->phone_country    = $request->phone_country;
         $this->phone            = $request->phone;

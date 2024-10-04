@@ -30,14 +30,24 @@ class MainController extends Controller
         return $this->response(ApiStatusEnum::WARNING, $message, $data, $code);
     }
 
-    public function error($message): JsonResponse
+    public function error(Exception $e, string $location, string $channel): JsonResponse
     {
+        $code = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+        if (is_numeric($e->getCode()) && $e->getCode() < 500) {
+            $code   = $e->getCode();
+            $msg    = $e->getMessage();
+        } else {
+            $msg = $this->getErrorMessage($e, $location, $channel);
+        }
+
         $result = $this->response(
             ApiStatusEnum::ERROR,
-            $message,
+            $msg,
             [],
-            Response::HTTP_INTERNAL_SERVER_ERROR
+            $code
         );
+
         return $result;
     }
 
@@ -58,7 +68,7 @@ class MainController extends Controller
         $log = Log::channel($channel)->error($errorLogMessage);
     }
 
-    public function getErrorMessage(Exception $e, string $location, string $channel): string
+    private function getErrorMessage(Exception $e, string $location, string $channel): string
     {
         $errorCode = $this->generateErrorCode($channel);
         $this->logException($e, $location, $channel, $errorCode);

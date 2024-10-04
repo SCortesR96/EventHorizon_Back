@@ -3,6 +3,7 @@
 namespace App\Modules\User\Data\Entities;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserStoreEntity
 {
@@ -36,6 +37,6 @@ class UserStoreEntity
         $this->phone            = $request->phone;
         $this->birthdate        = $request->birthdate;
         $this->email            = $request->email;
-        $this->password         = bcrypt($request->password);
+        $this->password         = Hash::make($request->password);
     }
 }

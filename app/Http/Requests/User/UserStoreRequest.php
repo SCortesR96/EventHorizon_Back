@@ -35,8 +35,9 @@ class UserStoreRequest extends FormRequest
             'gender_id'         => 'required|numeric|exists:genders,id',
             'phone_country'     => 'required|string|max:5',
             'phone'             => 'required|string|max:15',
-            'email'             => 'required|string|email',
-            'birthdate'         => 'required|date',
+            'email'             => 'required|string|email|unique:users,email',
+            'birthdate'         => 'required|date_format:Y/m/d',
+            'password'          => 'required|string|confirmed|min:8'
         ];
     }
 

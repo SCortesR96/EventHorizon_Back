@@ -18,10 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('users')->group(function () {
-    Route::get('', 'UserController@index');
-    Route::get('{id}', 'UserController@show');
-    Route::post('', 'UserController@store');
-    Route::put('{id}', 'UserController@update');
-    Route::delete('{id}', 'UserController@destroy');
+Route::middleware('auth:api')->group(function () {
+    Route::prefix('users')->group(function () {
+        Route::get('', 'UserController@index');
+        Route::get('{id}', 'UserController@show');
+        Route::post('', 'UserController@store');
+        Route::put('{id}', 'UserController@update');
+        Route::delete('{id}', 'UserController@destroy');
+    });
 });

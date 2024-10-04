@@ -38,7 +38,7 @@ class UserFactory extends Factory
             'birthdate'        => $this->faker->date('Y-m-d', '2000-01-01'),
             'email'            => $this->faker->unique()->safeEmail(),
             'enabled'          => $this->faker->boolean(),
-            'password'         => static::$password ??= Hash::make('password'),
+            'password'         => Hash::make('password'),
             'deleted_at'       => $isDeleted ? now() : null
         ];
     }

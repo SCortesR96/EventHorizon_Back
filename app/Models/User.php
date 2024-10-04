@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -34,9 +35,6 @@ class User extends Authenticatable
         'email',
         'password',
         'enabled',
-        'deleted',
-        'deleted_by',
-        'deleted_at',
     ];
 
     /**
@@ -56,6 +54,42 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
     ];
+
+    // *===========================*
+    // *======== Functions ========*
+    // *===========================*
+
+    public static function findByEmail($email)
+    {
+        if ($user = User::where('email', $email)->where('enabled', true)->first())
+            return $user;
+        return null;
+    }
+
+
+    // *=====================*
+    // *======== JWT ========*
+    // *=====================*
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

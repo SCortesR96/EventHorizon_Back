@@ -2,11 +2,9 @@
 
 namespace App\Modules\User\Domain\Usecases;
 
-use App\Config\Usecase;
-use App\Utils\Entities\Responses\ResponseEntity;
 use App\Modules\User\Domain\Repository\IUserRepository;
 
-class StoreUserUsecase extends Usecase
+class StoreUserUsecase
 {
     private IUserRepository $repository;
 

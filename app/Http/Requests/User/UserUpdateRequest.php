@@ -25,18 +25,14 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'avatar'            => 'nullable|string|max:255',
-            'username'          => 'required|string|max:255',
             'first_name'        => 'required|string|max:255',
             'second_name'       => 'nullable|string|max:255',
             'first_lastname'    => 'required|string|max:255',
             'second_lastname'   => 'required|string|max:255',
-            'document'          => 'required|string|unique:users,document,' . $this->route('id'),
-            'document_type_id'  => 'required|numeric|exists:document_types,id',
             'gender_id'         => 'required|numeric|exists:genders,id',
             'phone_country'     => 'required|string|max:5',
             'phone'             => 'required|string|max:15',
-            'email'             => 'required|string|email|max:255|unique:users,email,' . $this->route('id'),
-            'birthdate'         => 'required|date',
+            'enabled'           => 'required|boolean'
         ];
     }
 
@@ -52,12 +48,9 @@ class UserUpdateRequest extends FormRequest
             'second_name'       => 'second name',
             'first_lastname'    => 'first lastname',
             'second_lastname'   => 'second lastname',
-            'document_type_id'  => 'document type',
             'gender_id'         => 'gender',
             'phone_country'     => 'phone country code',
-            'phone'             => 'phone number',
-            'email'             => 'email address',
-            'birthdate'         => 'birthdate',
+            'phone'             => 'phone number'
         ];
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Modules\User\Domain\Usecases;
 
-use App\Config\Usecase;
 use App\Utils\Entities\Responses\ResponseEntity;
 use App\Modules\User\Domain\Repository\IUserRepository;
 
-class DeleteUserUsecase extends Usecase
+class DeleteUserUsecase
 {
     private IUserRepository $repository;
 
