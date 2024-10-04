@@ -2,11 +2,9 @@
 
 namespace App\Modules\User\Domain\Usecases;
 
-use App\Config\Usecase;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Modules\User\Domain\Repository\IUserRepository;
 
-class IndexUsersUsecase extends Usecase
+class UpdateUserUsecase
 {
     private IUserRepository $repository;
 
@@ -15,8 +13,8 @@ class IndexUsersUsecase extends Usecase
         $this->repository = $repository;
     }
 
-    public function execute($params = null): ResourceCollection
+    public function execute($params)
     {
-        return $this->repository->index();
+        return $this->repository->update($params[0], $params[1]);
     }
 }

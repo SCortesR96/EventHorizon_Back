@@ -2,18 +2,16 @@
 
 namespace Database\Factories;
 
+use App\Models\DocumentType;
+use App\Models\Gender;
+use App\Modules\User\Data\Entities\UserStoreEntity;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
     protected static ?string $password;
 
     /**
@@ -23,12 +21,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $isDeleted = $this->faker->boolean();
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'avatar'           => $this->faker->imageUrl(640, 480, 'people'),
+            'username'         => $this->faker->unique()->userName(),
+            'first_name'       => $this->faker->firstName(),
+            'second_name'      => $this->faker->firstName(),
+            'first_lastname'   => $this->faker->lastName(),
+            'second_lastname'  => $this->faker->lastName(),
+            'document_type_id' => DocumentType::inRandomOrder()->first()->id,
+            'document'         => $this->faker->unique()->numerify('##########'),
+            'gender_id'        => Gender::inRandomOrder()->first()->id,
+            'phone_country'    => $this->faker->countryCode(),
+            'phone'            => $this->faker->phoneNumber(),
+            'birthdate'        => $this->faker->date('Y-m-d', '2000-01-01'),
+            'email'            => $this->faker->unique()->safeEmail(),
+            'enabled'          => $this->faker->boolean(),
+            'password'         => Hash::make('password'),
+            'deleted_at'       => $isDeleted ? now() : null
         ];
     }
 
@@ -37,7 +48,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
