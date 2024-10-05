@@ -48,6 +48,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace . '\Auth')
                 ->group(base_path('routes/auth.php'));
 
+            Route::prefix('api/booking')
+                ->middleware('api')
+                ->namespace($this->namespace . '\Booking')
+                ->group(base_path('routes/booking.php'));
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });

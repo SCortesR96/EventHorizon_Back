@@ -143,5 +143,10 @@ return [
             'path' => storage_path('logs/user/User.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
+        'Booking' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/booking/Booking.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 ];
