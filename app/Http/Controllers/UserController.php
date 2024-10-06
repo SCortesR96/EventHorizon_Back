@@ -43,6 +43,8 @@ class UserController extends MainController
     }
 
     /**
+     * User | Index
+     *
      * Display a listing of the resource.
      *
      * @response array{"status": "success", "message": "Data loaded successfully.", "data": any }
@@ -62,6 +64,8 @@ class UserController extends MainController
     }
 
     /**
+     * User | Store
+     *
      * Store a newly created resource in storage.
      *
      * @param  mixed $request
@@ -83,6 +87,8 @@ class UserController extends MainController
     }
 
     /**
+     * User | Show
+     *
      * Display the specified resource.
      *
      * @param  mixed $id
@@ -110,6 +116,8 @@ class UserController extends MainController
     }
 
     /**
+     * User | Update
+     *
      * Update the specified resource in storage.
      *
      * @param  mixed $request
@@ -139,6 +147,8 @@ class UserController extends MainController
     }
 
     /**
+     * User | Delete
+     *
      * Remove the specified resource from storage.
      *
      * @param  mixed $id

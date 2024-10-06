@@ -34,7 +34,7 @@ class MainController extends Controller
     {
         $code = Response::HTTP_INTERNAL_SERVER_ERROR;
 
-        if (is_numeric($e->getCode()) && $e->getCode() < 500) {
+        if (is_numeric($e->getCode()) && $e->getCode() > 450 && $e->getCode() < 500) {
             $code   = $e->getCode();
             $msg    = $e->getMessage();
         } else {

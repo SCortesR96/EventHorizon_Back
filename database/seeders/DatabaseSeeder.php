@@ -3,7 +3,18 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Database\Seeders\Booking\{
+    BookingSeeder,
+    BookingStatusSeeder,
+    PlanSeeder,
+    PlanDetailSeeder,
+    PlanProductSeeder,
+    PlanDetailPlanProductSeeder,
+};
+use Database\Seeders\Location\PlaceStatusSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,15 +26,23 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DocumentTypeSeeder::class,
             GenderSeeder::class,
-            // CommentSeeder::class,
         ]);
 
-        \App\Models\User::factory(10)->create();
+        User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // BOOKING MODULE
+        $this->call([
+            PlanSeeder::class,
+            BookingStatusSeeder::class,
+            BookingSeeder::class,
+            PlanDetailSeeder::class,
+            PlanProductSeeder::class,
+            PlanDetailPlanProductSeeder::class,
+        ]);
 
+        // LOCATION MODULE
+        $this->call([
+            PlaceStatusSeeder::class,
+        ]);
     }
 }
