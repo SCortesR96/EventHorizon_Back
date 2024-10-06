@@ -3,8 +3,8 @@
 namespace App\Modules\Booking\Domain\Usecases\Plan;
 
 use App\Utils\Entities\Responses\ResponseEntity;
-use App\Modules\Booking\Data\Entities\PlanUpdateEntity;
 use App\Modules\Booking\Domain\Repository\IPlanRepository;
+use App\Modules\Booking\Data\Entities\Plan\PlanUpdateEntity;
 
 class PlanUpdateUsecase
 {

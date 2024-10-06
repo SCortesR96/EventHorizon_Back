@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\MainController;
 use App\Utils\Entities\Pagination\PaginationEntity;
-use App\Http\Requests\Booking\{
+use App\Http\Requests\Booking\Plan\{
     PlanStoreRequest,
     PlanUpdateRequest
 };
-use App\Modules\Booking\Data\Entities\{
+use App\Modules\Booking\Data\Entities\Plan\{
     PlanStoreEntity,
     PlanUpdateEntity
 };

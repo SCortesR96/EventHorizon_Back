@@ -2,24 +2,24 @@
 
 namespace App\Modules\Booking\Data\Services;
 
-use App\Models\Booking\Plan;
+use App\Models\Booking\PlanProduct;
 use App\Utils\Services\ResponseService;
-use App\Http\Resources\Booking\PlanResource;
+use App\Http\Resources\Booking\PlanProductResource;
 use App\Utils\Entities\Pagination\PaginationEntity;
 use App\Utils\Entities\Responses\{
+    ResponseEntity,
     PaginationResponseEntity,
-    ResponseEntity
 };
-use App\Modules\Booking\Data\Entities\Plan\{
-    PlanStoreEntity,
-    PlanUpdateEntity
+use App\Modules\Booking\Data\Entities\PlanProduct\{
+    PlanProductStoreEntity,
+    PlanProductUpdateEntity,
 };
 
-class PlanService
+class PlanProductService
 {
     public function index(PaginationEntity $pagination): PaginationResponseEntity
     {
-        $plans = Plan::where('title', 'like', '%' . $pagination->search . '%')
+        $planProducts = PlanProduct::where('name', 'like', '%' . $pagination->search . '%')
             ->orWhere('description', 'like', '%' . $pagination->search . '%')
             ->paginate(
                 $pagination->itemsPerPage,
@@ -29,45 +29,45 @@ class PlanService
             );
 
         return new PaginationResponseEntity(
-            $plans->perPage(),
-            $plans->currentPage(),
-            $plans->total(),
-            $plans->lastPage(),
-            PlanResource::collection($plans->items())
+            $planProducts->perPage(),
+            $planProducts->currentPage(),
+            $planProducts->total(),
+            $planProducts->lastPage(),
+            PlanProductResource::collection($planProducts->items())
         );
     }
 
     public function show(int $id): ResponseEntity
     {
-        if (!$plan = $this->verifyPlan($id)) {
+        if (!$planProduct = $this->verifyPlan($id)) {
             return ResponseService::notFound();
         }
 
-        $resource = PlanResource::make($plan);
+        $resource = PlanProductResource::make($planProduct);
         return ResponseService::load($resource);
     }
 
-    public function store(PlanStoreEntity $entity): bool
+    public function store(PlanProductStoreEntity $entity): bool
     {
-        $plan = new Plan();
-        $plan->fill($entity->toArray());
+        $planProduct = new PlanProduct();
+        $planProduct->fill($entity->toArray());
 
-        if ($plan->save()) {
+        if ($planProduct->save()) {
             return true;
         }
 
         throw new \Exception(__('responses.error.saved'));
     }
 
-    public function update(PlanUpdateEntity $entity, int $id): ResponseEntity
+    public function update(PlanProductUpdateEntity $entity, int $id): ResponseEntity
     {
-        if (!$plan = $this->verifyPlan($id)) {
+        if (!$planProduct = $this->verifyPlan($id)) {
             return ResponseService::notFound();
         }
 
-        $plan->fill($entity->toArray());
+        $planProduct->fill($entity->toArray());
 
-        if ($plan->save()) {
+        if ($planProduct->save()) {
             return ResponseService::updated();
         }
 
@@ -76,23 +76,23 @@ class PlanService
 
     public function delete(int $id): ResponseEntity
     {
-        if (!$plan = $this->verifyPlan($id)) {
+        if (!$planProduct = $this->verifyPlan($id)) {
             return ResponseService::notFound();
         }
 
-        if ($plan->delete()) {
+        if ($planProduct->delete()) {
             return ResponseService::deleted();
         }
 
         throw new \Exception(__('responses.error.deleted'));
     }
 
-    public function verifyPlan(int $id): Plan | false
+    public function verifyPlan(int $id): PlanProduct | false
     {
-        if (!$plan = Plan::find($id)) {
+        if (!$planProduct = PlanProduct::find($id)) {
             return false;
         }
 
-        return $plan;
+        return $planProduct;
     }
 }

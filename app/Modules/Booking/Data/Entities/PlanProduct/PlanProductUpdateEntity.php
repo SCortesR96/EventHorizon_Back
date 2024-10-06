@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Modules\Booking\Data\Entities\Plan;
+namespace App\Modules\Booking\Data\Entities\PlanProduct;
 
 use Illuminate\Http\Request;
 
-class PlanStoreEntity
+class PlanProductUpdateEntity
 {
     public string $name;
-    public string $title;
     public string $description;
 
     public function __construct(Request $request)
     {
         $this->name         = $request->name;
-        $this->title        = $request->title;
         $this->description  = $request->description ?? '';
     }
 
@@ -21,7 +19,6 @@ class PlanStoreEntity
     {
         return [
             'name'        => $this->name,
-            'title'       => $this->title,
             'description' => $this->description,
         ];
     }

@@ -7,10 +7,18 @@ use App\Modules\Auth\Data\Repository\AuthRepository;
 use App\Modules\User\Data\Repository\UserRepository;
 use App\Modules\Auth\Domain\Repository\IAuthRepository;
 use App\Modules\User\Domain\Repository\IUserRepository;
-use App\Modules\Booking\Data\Repository\BookingRepository;
-use App\Modules\Booking\Data\Repository\PlanRepository;
-use App\Modules\Booking\Domain\Repository\IBookingRepository;
-use App\Modules\Booking\Domain\Repository\IPlanRepository;
+use App\Modules\Booking\Data\Repository\{
+    BookingRepository,
+    PlanDetailRepository,
+    PlanProductRepository,
+    PlanRepository
+};
+use App\Modules\Booking\Domain\Repository\{
+    IBookingRepository,
+    IPlanDetailRepository,
+    IPlanProductRepository,
+    IPlanRepository
+};
 
 class ModulesServiceProvider extends ServiceProvider
 {
@@ -37,6 +45,16 @@ class ModulesServiceProvider extends ServiceProvider
         $this->app->bind(
             IPlanRepository::class,
             PlanRepository::class
+        );
+
+        $this->app->bind(
+            IPlanProductRepository::class,
+            PlanProductRepository::class
+        );
+
+        $this->app->bind(
+            IPlanDetailRepository::class,
+            PlanDetailRepository::class
         );
     }
 

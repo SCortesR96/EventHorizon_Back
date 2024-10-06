@@ -5,7 +5,7 @@ namespace App\Modules\Booking\Domain\Repository;
 use App\Utils\Entities\Responses\ResponseEntity;
 use App\Utils\Entities\Pagination\PaginationEntity;
 use App\Utils\Entities\Responses\PaginationResponseEntity;
-use App\Modules\Booking\Data\Entities\{
+use App\Modules\Booking\Data\Entities\Plan\{
     PlanUpdateEntity,
     PlanStoreEntity
 };

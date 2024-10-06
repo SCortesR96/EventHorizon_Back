@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Modules\Booking\Data\Entities;
+namespace App\Modules\Booking\Data\Entities\PlanProduct;
 
 use Illuminate\Http\Request;
 
-class PlanUpdateEntity
+class PlanProductStoreEntity
 {
-    public string $title;
+    public string $name;
     public string $description;
 
     public function __construct(Request $request)
     {
-        $this->title        = $request->title;
+        $this->name         = $request->name;
         $this->description  = $request->description ?? '';
     }
 
     public function toArray()
     {
         return [
-            'title'       => $this->title,
+            'name'        => $this->name,
             'description' => $this->description,
         ];
     }

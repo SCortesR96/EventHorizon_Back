@@ -7,7 +7,7 @@ use App\Modules\Booking\Data\Services\PlanService;
 use App\Utils\Entities\Pagination\PaginationEntity;
 use App\Modules\Booking\Domain\Repository\IPlanRepository;
 use App\Utils\Entities\Responses\PaginationResponseEntity;
-use App\Modules\Booking\Data\Entities\{
+use App\Modules\Booking\Data\Entities\Plan\{
     PlanStoreEntity,
     PlanUpdateEntity
 };
