@@ -56,6 +56,11 @@ class ModulesServiceProvider extends ServiceProvider
             IPlanDetailRepository::class,
             PlanDetailRepository::class
         );
+
+        $this->app->bind(
+            IBookingRepository::class,
+            BookingRepository::class
+        );
     }
 
     /**

@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::prefix('')->group(function() {
+    Route::get('', 'BookingController@index');
+    Route::post('', 'BookingController@store');
+    Route::get('{id}', 'BookingController@show');
+    Route::put('{id}', 'BookingController@update');
+    Route::delete('{id}', 'BookingController@destroy');
+});
+
 Route::prefix('plans')->group(function () {
     Route::get('', 'PlanController@index');
     Route::post('', 'PlanController@store');
