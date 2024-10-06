@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Booking;
 
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\MainController;
+use App\Utils\Entities\Pagination\PaginationEntity;
 use App\Http\Requests\Booking\{
     PlanStoreRequest,
     PlanUpdateRequest
@@ -50,10 +52,12 @@ class PlanController extends MainController
      *
      * @response array{"status": "success", "message": "Data loaded successfully.", "data": any }
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
-            $data = $this->planIndexUsecase->execute();
+            $pagination = new PaginationEntity($request);
+
+            $data = $this->planIndexUsecase->execute($pagination);
             return $this->success(
                 __('responses.success.load'),
                 $data,

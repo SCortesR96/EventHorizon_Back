@@ -10,5 +10,11 @@ Route::prefix('plans')->group(function () {
     Route::put('{id}', 'PlanController@update');
     Route::delete('{id}', 'PlanController@destroy');
 
-    // Route::prefix('products')->group(function () {});
+    Route::prefix('products')->group(function () {
+        Route::get('', 'PlanProductController@index');
+        Route::post('', 'PlanProductController@store');
+        Route::get('{id}', 'PlanProductController@show');
+        Route::put('{id}', 'PlanProductController@update');
+        Route::delete('{id}', 'PlanProductController@destroy');
+    });
 });

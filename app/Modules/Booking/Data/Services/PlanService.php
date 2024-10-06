@@ -6,15 +6,33 @@ use App\Models\Booking\Plan;
 use App\Utils\Services\ResponseService;
 use App\Http\Resources\Booking\PlanResource;
 use App\Utils\Entities\Responses\ResponseEntity;
-use App\Modules\Booking\Data\Entities\PlanStoreEntity;
-use App\Modules\Booking\Data\Entities\PlanUpdateEntity;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Utils\Entities\Pagination\PaginationEntity;
+use App\Utils\Entities\Responses\PaginationResponseEntity;
+use App\Modules\Booking\Data\Entities\{
+    PlanStoreEntity,
+    PlanUpdateEntity
+};
 
 class PlanService
 {
-    public function index(): ResourceCollection
+    public function index(PaginationEntity $pagination): PaginationResponseEntity
     {
-        return PlanResource::collection(Plan::get());
+        $plans = Plan::where('title', 'like', '%' . $pagination->search . '%')
+            ->orWhere('description', 'like', '%' . $pagination->search . '%')
+            ->paginate(
+                $pagination->itemsPerPage,
+                ['*'],
+                'page',
+                $pagination->page
+            );
+
+        return new PaginationResponseEntity(
+            $plans->perPage(),
+            $plans->currentPage(),
+            $plans->total(),
+            $plans->lastPage(),
+            PlanResource::collection($plans->items())
+        );
     }
 
     public function show(int $id): ResponseEntity

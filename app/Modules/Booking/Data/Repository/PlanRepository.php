@@ -4,9 +4,13 @@ namespace App\Modules\Booking\Data\Repository;
 
 use App\Utils\Entities\Responses\ResponseEntity;
 use App\Modules\Booking\Data\Services\PlanService;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Utils\Entities\Pagination\PaginationEntity;
 use App\Modules\Booking\Domain\Repository\IPlanRepository;
-use App\Modules\Booking\Data\Entities\{PlanStoreEntity, PlanUpdateEntity};
+use App\Utils\Entities\Responses\PaginationResponseEntity;
+use App\Modules\Booking\Data\Entities\{
+    PlanStoreEntity,
+    PlanUpdateEntity
+};
 
 class PlanRepository extends IPlanRepository
 {
@@ -17,9 +21,9 @@ class PlanRepository extends IPlanRepository
         $this->planService = $planService;
     }
 
-    public function index(): ResourceCollection
+    public function index(PaginationEntity $pagination): PaginationResponseEntity
     {
-        return $this->planService->index();
+        return $this->planService->index($pagination);
     }
 
     public function show(int $id): ResponseEntity

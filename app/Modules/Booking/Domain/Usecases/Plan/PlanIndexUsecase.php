@@ -2,8 +2,9 @@
 
 namespace App\Modules\Booking\Domain\Usecases\Plan;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Utils\Entities\Pagination\PaginationEntity;
 use App\Modules\Booking\Domain\Repository\IPlanRepository;
+use App\Utils\Entities\Responses\PaginationResponseEntity;
 
 class PlanIndexUsecase
 {
@@ -14,8 +15,8 @@ class PlanIndexUsecase
         $this->repository = $repository;
     }
 
-    public function execute(): ResourceCollection
+    public function execute(PaginationEntity $pagination): PaginationResponseEntity
     {
-        return $this->repository->index();
+        return $this->repository->index($pagination);
     }
 }
