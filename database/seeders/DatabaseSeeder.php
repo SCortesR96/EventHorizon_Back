@@ -14,6 +14,7 @@ use Database\Seeders\Booking\{
     PlanProductSeeder,
     PlanDetailPlanProductSeeder,
 };
+use Database\Seeders\Location\PlaceSeeder;
 use Database\Seeders\Location\PlaceStatusSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
 
         // LOCATION MODULE
         $this->call([
+            PlaceSeeder::class,
             PlaceStatusSeeder::class,
         ]);
     }

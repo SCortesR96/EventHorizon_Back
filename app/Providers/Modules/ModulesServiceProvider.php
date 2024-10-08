@@ -19,6 +19,8 @@ use App\Modules\Booking\Domain\Repository\{
     IPlanProductRepository,
     IPlanRepository
 };
+use App\Modules\Location\Data\Repository\PlaceRepository;
+use App\Modules\Location\Domain\Repository\IPlaceRepository;
 
 class ModulesServiceProvider extends ServiceProvider
 {
@@ -60,6 +62,11 @@ class ModulesServiceProvider extends ServiceProvider
         $this->app->bind(
             IBookingRepository::class,
             BookingRepository::class
+        );
+
+        $this->app->bind(
+            IPlaceRepository::class,
+            PlaceRepository::class
         );
     }
 

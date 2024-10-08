@@ -18,8 +18,12 @@ class PlaceFactory extends Factory
     {
         return [
             'name'          => $this->faker->word(1),
-            'display_name'  => $this->faker->words(3, true),
-            'description'   => $this->faker->sentence()
+            'description'   => $this->faker->sentence(),
+            'address'       => $this->faker->address(),
+            'postal_code'   => $this->faker->postcode(),
+            'country'       => $this->faker->country(),
+            'state'         => $this->faker->city(),
+            'city'          => $this->faker->city(),
         ];
     }
 }

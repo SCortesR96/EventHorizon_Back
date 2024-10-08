@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('description');
             $table->string('postal_code');
             $table->string('country');
+            $table->string('state');
+            $table->string('city');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
